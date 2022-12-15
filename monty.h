@@ -40,7 +40,40 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+/**
+ * struct validator - return value of opcode and if list is stack or queue
+ * @opcode: return value of opcode
+ * @queue_value: 1 if list is a queue, 0 if list is a stack
+ */
 
+typedef struct validator
+{
+	int opcode;
+	int queue_value;
+} validator_t;
+
+extern validator_t rq;
+
+char *find_co(char *line, stack_t **stack, unsigned int n_line);
+int isnumber(char *str);
+void add_node(stack_t **stack, int value);
+void add_node_end(stack_t **stack, int value);
+int check_opcode(char *command, stack_t **stack, size_t n_line);
+void kill_free(char *line, FILE *file, stack_t *stack);
+void kill_stack(stack_t *stack);
+void pall(stack_t **stack, unsigned int n_line);
+void pint(stack_t **stack, unsigned int n_line);
+void pop(stack_t **stack, unsigned int n_line);
+void swap(stack_t **stack, unsigned int n_line);
+void _div(stack_t **stack, unsigned int n_line);
+void add(stack_t **stack, unsigned int n_line);
+void sub(stack_t **stack, unsigned int n_line);
+void mul(stack_t **stack, unsigned int n_line);
+void mod(stack_t **stack, unsigned int n_line);
+void pchar(stack_t **stack, unsigned int n_line);
+void rotl(stack_t **stack, unsigned int n_line);
+void pstr(stack_t **stack, unsigned int n_line);
+void rotr(stack_t **stack, unsigned int n_line);
 
 
 #endif
