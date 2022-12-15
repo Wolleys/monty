@@ -1,20 +1,14 @@
-#ifndef MONTY_HEADERS
-#define MONTY_HEADERS
+#ifndef MONTY
+#define MONTY
 #define  _GNU_SOURCE
 
 #include <stdio.h>
-#include <fcntl.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <string.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 #include <ctype.h>
-
-#endif /* MONTY_HEADERS */
-
-#ifndef MONTY_STRUCT
-#define MONTY_STRUCT
-
-/* STRUCT #1 */
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -32,7 +26,27 @@ typedef struct stack_s
 	struct stack_s *next;
 } stack_t;
 
-/* STRUCT #2 */
+/**
+ * struct globals - global structure to use in the functions
+ * @lifo: is stack or queue
+ * @cont: current line
+ * @arg: second parameter inside the current line
+ * @head: doubly linked list
+ * @fd: file descriptor
+ * @buffer: input text
+ *
+ * Description: doubly linked list node structure
+ * for stack, queues, LIFO, FIFO
+ */
+typedef struct globals
+{
+	int lifo;
+	unsigned int cont;
+	char  *arg;
+	stack_t *head;
+	FILE *fd;
+	char *buffer;
+} global_t;
 
 /**
  * struct instruction_s - opcode and its function
@@ -48,49 +62,43 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-#endif /* MONTY_STRUCT */
+extern global_t vglo;
 
-#ifndef VALIDATOR
-#define VALIDATOR
+/* opcode_instructuions*/
+void _push(stack_t **stack, unsigned int line_number);
+void _pall(stack_t **stack, unsigned int line_number);
+void _pint(stack_t **doubly, unsigned int cline);
+void _pop(stack_t **doubly, unsigned int cline);
+void _swap(stack_t **doubly, unsigned int cline);
+void _queue(stack_t **doubly, unsigned int cline);
+void _stack(stack_t **doubly, unsigned int cline);
+void _add(stack_t **doubly, unsigned int cline);
+void _nop(stack_t **doubly, unsigned int cline);
+void _sub(stack_t **doubly, unsigned int cline);
+void _div(stack_t **doubly, unsigned int cline);
+void _mul(stack_t **doubly, unsigned int cline);
+void _mod(stack_t **doubly, unsigned int cline);
+void _pchar(stack_t **doubly, unsigned int cline);
+void _pstr(stack_t **doubly, unsigned int cline);
+void _rotl(stack_t **doubly, unsigned int cline);
+void _rotr(stack_t **doubly, unsigned int cline);
 
-/**
- * struct validator - return value of opcode and if list is stack or queue
- * @opcode: return value of opcode
- * @queue_value: 1 if list is a queue, 0 if list is a stack
- */
+/*get function*/
+void (*get_opcodes(char *opc))(stack_t **stack, unsigned int line_number);
 
-typedef struct validator
-{
-	int opcode;
-	int queue_value;
-} validator_t;
+/*imported functions*/
+int _sch(char *s, char c);
+char *_strtoky(char *s, char *d);
+void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
+void *_calloc(unsigned int nmemb, unsigned int size);
+int _strcmp(char *s1, char *s2);
 
-extern validator_t rq;
+/* doubly linked list functions */
+stack_t *add_dnodeint_end(stack_t **head, const int n);
+stack_t *add_dnodeint(stack_t **head, const int n);
+void free_dlistint(stack_t *head);
 
-#endif /* VALIDATOR */
+/* main */
+void free_vglo(void);
 
-#ifndef FUNCTIONS
-#define FUNCTIONS
-
-char *find_co(char *line, stack_t **stack, unsigned int n_line);
-int isnumber(char *str);
-void add_node(stack_t **stack, int value);
-void add_node_end(stack_t **stack, int value);
-int check_opcode(char *command, stack_t **stack, size_t n_line);
-void kill_free(char *line, FILE *file, stack_t *stack);
-void kill_stack(stack_t *stack);
-void pall(stack_t **stack, unsigned int n_line);
-void pint(stack_t **stack, unsigned int n_line);
-void pop(stack_t **stack, unsigned int n_line);
-void swap(stack_t **stack, unsigned int n_line);
-void _div(stack_t **stack, unsigned int n_line);
-void add(stack_t **stack, unsigned int n_line);
-void sub(stack_t **stack, unsigned int n_line);
-void mul(stack_t **stack, unsigned int n_line);
-void mod(stack_t **stack, unsigned int n_line);
-void pchar(stack_t **stack, unsigned int n_line);
-void rotl(stack_t **stack, unsigned int n_line);
-void pstr(stack_t **stack, unsigned int n_line);
-void rotr(stack_t **stack, unsigned int n_line);
-
-#endif /* Functions */
+#endif
