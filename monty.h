@@ -1,13 +1,20 @@
-#ifndef MONTY
-#define MONTY
+#ifndef MONTY_HEADERS
+#define MONTY_HEADERS
+#define  _GNU_SOURCE
 
 #include <stdio.h>
+#include <fcntl.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
+#include <string.h>
 #include <ctype.h>
+
+#endif /* MONTY_HEADERS */
+
+#ifndef MONTY_STRUCT
+#define MONTY_STRUCT
+
+/* STRUCT #1 */
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -25,6 +32,7 @@ typedef struct stack_s
 	struct stack_s *next;
 } stack_t;
 
+/* STRUCT #2 */
 
 /**
  * struct instruction_s - opcode and its function
@@ -40,6 +48,11 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+#endif /* MONTY_STRUCT */
+
+#ifndef VALIDATOR
+#define VALIDATOR
+
 /**
  * struct validator - return value of opcode and if list is stack or queue
  * @opcode: return value of opcode
@@ -53,6 +66,11 @@ typedef struct validator
 } validator_t;
 
 extern validator_t rq;
+
+#endif /* VALIDATOR */
+
+#ifndef FUNCTIONS
+#define FUNCTIONS
 
 char *find_co(char *line, stack_t **stack, unsigned int n_line);
 int isnumber(char *str);
@@ -75,5 +93,4 @@ void rotl(stack_t **stack, unsigned int n_line);
 void pstr(stack_t **stack, unsigned int n_line);
 void rotr(stack_t **stack, unsigned int n_line);
 
-
-#endif
+#endif /* Functions */
