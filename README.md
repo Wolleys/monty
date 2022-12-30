@@ -1,6 +1,14 @@
-# Monty
-At the end of this project, you are expected to be able to [explain to anyone](https://fs.blog/feynman-learning-technique/?fbclid=IwAR2K5_BGPVo0QjJXkOIIqNsqcXK4lTskPWJvA0asKQIGtCPWaQBdKmj1Ztg), 
-**without the help of Google:**
+# Monty - Stacks, Queues - LIFO, FIFO
+
+# Resources
+1. [Google](https://www.google.com/webhp?q=stack%20and%20queue)
+2. [How do I use extern to share variables between source files in C?](https://stackoverflow.com/questions/1433204/how-do-i-use-extern-to-share-variables-between-source-files)
+3. [Stacks and Queues in C](https://data-flair.training/blogs/stacks-and-queues-in-c/)
+4. [Stack operations](https://www.digitalocean.com/community/tutorials/stack-in-c)
+5. [Queue operations](https://www.edureka.co/blog/queue-in-c/)
+
+# Learning Objectives
+At the end of this project, you are expected to be able to [explain to anyone](https://fs.blog/feynman-learning-technique/?fbclid=IwAR2K5_BGPVo0QjJXkOIIqNsqcXK4lTskPWJvA0asKQIGtCPWaQBdKmj1Ztg), **without the help of Google:**
 
 ## General
 * What do LIFO and FIFO mean
